@@ -134,7 +134,7 @@
 <section class="slide pic">
 <div>
 <a href="https://commons.wikimedia.org/wiki/File:2013-06-08_Projekt_Hei%C3%9Flufftballon_DSCF7648.jpg">
-<img src="pictures/containerspng"/>
+<img src="pictures/containers.jpg"/>
 </a>
 </div>
 </section>
@@ -151,9 +151,10 @@
 </div>
 </section>
 
+
 <section class="slide shout">
 <div>
-<h2>Go Rust Swift Lua OCaml JavaScript Haskell Elixir C++ K Forth Lisp Nim D</h2>
+<h2>Snabb: 10 gigabit ethernet scripting in Lua</h2>
 </div>
 </section>
 
@@ -165,19 +166,16 @@
 </div>
 </section>
 
-<section class="slide shout">
-<div>
-<h2>Snabb: 10 gigabit ethernet scripting in Lua</h2>
-</div>
-</section>
-
 <section class="slide">
 <div>
-<p>LuaJIT
+<p>Why networking?
 <ul>
-<li>Very high performance JIT compiled implementation of Lua
-<li>Zero cost FFI interface to C code or system calls
-<li>Terminates all traffic at Cloudflare for DDoS protection
+<li>10Gb networking has shown the limitations of context switching from kernel
+<li>Now 40Gb and 100Gb in servers is becoming standard
+<li>10Gb line rate is 67.2 ns per packet (smallest packets)
+<li>A cache miss takes 32 ns
+<li>A system call takes around 40 ns (audit disabled)
+<li>When the going gets weird...
 </ul>
 </div>
 </section>
@@ -204,11 +202,154 @@
 <li>Enough performance that modern hardware eg 10Gb+ is realistic
 <li>Avoid memory allocation in inner loops to avoid GC
 <li>Ability to write some code in assembly eg AVX/SSE for checksums as compilers generally do not do a good job
+<li>Access to low level performance debuggin tools
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<div>
+<p>LuaJIT
+<ul>
+<li>Very high performance JIT compiled implementation of Lua
+<li>Zero cost FFI interface to C code or system calls
+<li>Terminates all traffic at Cloudflare for DDoS protection
+<li>Transitioning from an amazing single person project to a community project
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<div>
+<p><a href="https://github.com/snabbco/snabb">Snabb</a>
+<ul>
+<li>Toolkit for building packet processing applications
+<li>tunnelling
+<li>filtering
+<li>routing
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<div>
+<p><a href="https://github.com/Igalia/pflua">pflua</a>
+<ul>
+<li>Fastest implementation of same pf language used by Linux, tcpdump
+<li>LuaJIT trace compilation results in machine code that reflects the actual traffic that your application sees
+<li>Pflua takes advantage of LuaJIT's register allocator and excellent optimizing compiler, whereas e.g. the Linux kernel JIT has a limited optimizer
+<li>Optimises bounds checks by hoisting out of loop
+</ul>
+</div>
+</section>
+
+<section class="slide shout">
+<div>
+<h2>MirageOS: the full stack</h2>
+</div>
+</section>
+
+<section class="slide">
+<div>
+<p><a href="http://unikernel.org">Unikernels</a>
+<ul>
+<li>Full application that contains all its system dependencies
+<li>Its own TCP stack
+<li>Its own threading and scheduling, as needed
+<li>Its own memory allocation
+<li>Talk to hardware or virtualised hardware via a VM
+<li>As libraries, not trying to remake Linux or Windows style monoliths
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<div>
+<h2>A security hardened container</h2>
+<ul>
+<li>No large OS attack surface
+<li>Just what you need, no extra shell or other executables, so small attack surface
+<li>Can run inside virtual machine for sandboxing
+<li>Language guarantees, like type safety and memory safety
+<li>Can use additional sandboxing techniques: ASLR, NaCl etc
+<li>Whole system hardening
+<li>Ideal for embedded systems
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<div>
+<h2>Examples of unikernels</h2>
+<ul>
+<li><a href="https://mirage.io/">Mirage</a> (OCaml)
+<li><a href="https://galois.com/project/halvm/">HalVM</a> (Haskell)
+<li><a href="http://erlangonxen.org/">Ling</a> (Erlang)
+<li><a href="http://runtimejs.org/">runtime.js</a> (JavaScript)
+<li><a href="http://www.includeos.org/">IncludeOS</a> (C++)
+</ul>
+</div>
+</section>
+
+<!-- mirage examples -->
+
+<section class="slide shout">
+<div>
+<h2>Go Rust Swift Lua OCaml JavaScript Haskell Elixir C++ K Forth Lisp Nim D</h2>
+</div>
+</section>
+
+
+<section class="slide">
+<div>
+<h2>What language features are useful?</h2>
+<ul>
+<li>“Zero cost abstractions” &ndash; no point having abstractions if you can‘t use them
+<li>Related, reliable compiler optimisation.
+<li>Predicatability.
 </ul>
 </div>
 </section>
 
 
+<section class="slide">
+<div>
+<h2>Garbage collection</h2>
+<ul>
+<li>It has long been said that garbage collection is fatal for system software
+<li>In practise not necessarily true. Do not generate vast emounts of garbage, especially in main loop
+<li>Very few things are actually real time; these need special treatment anyway.
+<li>OCaml and LuaJIT applications manage fine.
+<li>Swift and Rust are the other options...
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<div>
+<h2>The Rust promise</h2>
+<ul>
+<li>Ownership types - can show in the type system that gc is not needed
+<li>No GC
+<li>No Runtime required
+<li>As well as zero cost abstractions
+</ul>
+</div>
+</section>
+
+<!-- docker 4 mac / win? -->
+
+<section class="slide pic">
+<div>
+<img src="pictures/belllabs.jpg"/>
+</div>
+</section>
+
+<section class="slide shout">
+<div>
+<h2>Go hack on systems software</h2>
+</div>
+</section>
 
 <section class="slide">
 <div>

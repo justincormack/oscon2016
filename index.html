@@ -131,6 +131,14 @@
 </div>
 </section>
 
+<section class="slide pic">
+<div>
+<a href="https://commons.wikimedia.org/wiki/File:2013-06-08_Projekt_Hei%C3%9Flufftballon_DSCF7648.jpg">
+<img src="pictures/containerspng"/>
+</a>
+</div>
+</section>
+
 <section class="slide shout">
 <div>
 <h2>where are the microservices and libraries for system software?</h2>
@@ -149,7 +157,13 @@
 </div>
 </section>
 
-<!-- pic of networking -->
+<section class="slide pic">
+<div>
+<a href="https://commons.wikimedia.org/wiki/File:Colosse_de_Quebec_5.jpg">
+<img src="pictures/fibre.png"/>
+</a>
+</div>
+</section>
 
 <section class="slide shout">
 <div>
@@ -170,18 +184,29 @@
 
 <section class="slide">
 <div>
-<p>Hardware presents higher level interfaces
+<p>Hardware now presents higher level interfaces
 <ul>
 <li>Ring buffers
 <li>Multiple rings (per CPU, virtual CPU or process) so no locking needed
+<li>Virtual functions (SR-IOV) so hardware not shared between applications
 <li>Higher level interfaces in firmware eg NVMe
-<li>More standardisation, single interface for ranges of hardware
+<li>More standardisation, single interface for ranges of hardware eg 10Gb-100Gb ethernet
 <li>Open specifications and data sheets
 </ul>
 </div>
 </section>
 
-
+<section class="slide">
+<div>
+<p>Makes it realistic to write drivers in a language that has:
+<ul>
+<li>Direct access to memory
+<li>Enough performance that modern hardware eg 10Gb+ is realistic
+<li>Avoid memory allocation in inner loops to avoid GC
+<li>Ability to write some code in assembly eg AVX/SSE for checksums as compilers generally do not do a good job
+</ul>
+</div>
+</section>
 
 
 

@@ -70,9 +70,27 @@
 </div>
 </section>
 
+<section class="slide shout">
+<div>
+<h2>Hi I am Justin, I am a C programmer</h2>
+</div>
+</section>
+
 <section class="slide pic">
 <div>
 <img src="pictures/weird.jpg"/>
+</div>
+</section>
+
+<section class="slide shout">
+<div>
+<h2>Systems Software</h2>
+</div>
+</section>
+
+<section class="slide shout">
+<div>
+<h2>TCP scheduling UDP threading SCSI filesystems NVMe ethernet memory virtualisation</h2>
 </div>
 </section>
 
@@ -243,6 +261,33 @@
 </div>
 </section>
 
+<1--
+<section class="slide">
+<div>
+<code>
+function PcapFilter:push ()
+   local i = assert(self.input.input or self.input.rx, "input port not found")
+   local o = assert(self.output.output or self.output.tx, "output port not found")
+
+   while not link.empty(i) do
+      local p = link.receive(i)
+      local spec = self.state_table and conntrack.spec(p.data)
+
+      if spec and spec:check(self.state_table) then
+         link.transmit(o, p)
+      elseif self.accept_fn(p.data, p.length) then
+         if spec then spec:track(self.state_table) end
+         link.transmit(o, p)
+      else
+         packet.free(p)
+      end
+   end
+end
+</code>
+</div>
+</section>
+-->
+
 <section class="slide shout">
 <div>
 <h2>MirageOS: the full stack</h2>
@@ -332,12 +377,26 @@
 <li>Ownership types - can show in the type system that gc is not needed
 <li>No GC
 <li>No Runtime required
+<li>threads without data races
 <li>As well as zero cost abstractions
 </ul>
 </div>
 </section>
 
-<!-- docker 4 mac / win? -->
+<section class="slide shout">
+<div>
+<h2>Systems programming at Docker</h2>
+</div>
+</section>
+
+<!-- docker 4 mac / win - pic -->
+
+<!-- hyperkit -->
+
+<!-- unikernels -->
+<!-- containers -->
+
+<!-- distributed systems?? -->
 
 <section class="slide pic">
 <div>
@@ -347,7 +406,7 @@
 
 <section class="slide shout">
 <div>
-<h2>Go hack on systems software</h2>
+<h2>Go hack on systems software!</h2>
 </div>
 </section>
 

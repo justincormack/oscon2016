@@ -72,7 +72,7 @@
 
 <section class="slide shout">
 <div>
-<h2>Hi I am Justin, I am a C programmer</h2>
+<h2>Hi I am Justin, I was a C programmer</h2>
 </div>
 </section>
 
@@ -227,6 +227,29 @@
 
 <section class="slide">
 <div>
+	<p>foreign function interfaces (ffi)
+<ul>
+<li>Simple interface to C ABI
+<li>Where you still have some C code
+<li>Or to interface with system calls
+<li>Go, Lua, Ocaml, Rust all have really easy ffi
+<li>Makes interop really trivial
+</div>
+</section>
+
+<section class="slide">
+<div>
+<pre>
+<code>ffi.cdef "int open(const char *pathname, int flags);"</code>
+<code>function open(path, flags) return C.open(path, flags) end
+</pre>
+<p>Pretty much declare you C header then use the code directly, but may want cleaner wrappers eg see <a href="ljsyscall">https://github.com/justincormack/ljsyscall</a>
+</div>
+</section>
+
+
+<section class="slide">
+<div>
 <p>LuaJIT
 <ul>
 <li>Very high performance JIT compiled implementation of Lua
@@ -261,32 +284,28 @@
 </div>
 </section>
 
-<1--
 <section class="slide">
 <div>
-<code>
-function PcapFilter:push ()
-   local i = assert(self.input.input or self.input.rx, "input port not found")
-   local o = assert(self.output.output or self.output.tx, "output port not found")
-
-   while not link.empty(i) do
-      local p = link.receive(i)
-      local spec = self.state_table and conntrack.spec(p.data)
-
-      if spec and spec:check(self.state_table) then
-         link.transmit(o, p)
-      elseif self.accept_fn(p.data, p.length) then
-         if spec then spec:track(self.state_table) end
-         link.transmit(o, p)
-      else
-         packet.free(p)
-      end
-   end
-end
-</code>
+	<pre>
+<code>function PcapFilter:push ()</code>
+<code>   local i = assert(self.input.input or self.input.rx, "input port not found")</code>
+<code>   local o = assert(self.output.output or self.output.tx, "output port not found")</code>
+<code>   while not link.empty(i) do</code>
+<code>      local p = link.receive(i)</code>
+<code>      local spec = self.state_table and conntrack.spec(p.data)</code>
+<code>      if spec and spec:check(self.state_table) then</code>
+<code>         link.transmit(o, p)</code>
+<code>      elseif self.accept_fn(p.data, p.length) then</code>
+<code>         if spec then spec:track(self.state_table) end</code>
+<code>         link.transmit(o, p)</code>
+<code>      else</code>
+<code>         packet.free(p)</code>
+<code>      end</code>
+<code>   end</code>
+<code>end</code>
+</pre>
 </div>
 </section>
--->
 
 <section class="slide shout">
 <div>
@@ -336,7 +355,20 @@ end
 </div>
 </section>
 
-<!-- mirage examples -->
+<section class="slide">
+	<div>
+	<pre>
+<code>module Ethif1 = Ethif.Make(Netif)</code>
+<code>module Arpv41 = Arpv4.Make(Ethif1)(Clock)(OS.Time)</code>
+<code>module Ipv41 = Ipv4.Make(Ethif1)(Arpv41)</code>
+<code>module Udp1 = Udp.Make(Ipv41)</code>
+<code>module Tcp1 = Tcp.Flow.Make(Ipv41)(OS.Time)(Clock)(Random)</code>
+<code>module Tcpip_stack_direct1 = Tcpip_stack_direct.Make(Console_unix)(OS.Time)</code>
+<code>    (Random)(Netif)(Ethif1)(Arpv41)(Ipv41)(Udp1)(Tcp1)</code>
+</pre>
+</div>
+</section>
+
 
 <section class="slide shout">
 <div>

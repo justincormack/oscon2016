@@ -72,7 +72,7 @@
 
 <section class="slide shout">
 <div>
-<h2>Hi I am Justin, I was a C programmer</h2>
+<h2>Hi I am Justin, I&nbsp;was a C programmer</h2>
 </div>
 </section>
 
@@ -239,11 +239,11 @@
 
 <section class="slide">
 <div>
+	<p>Pretty much declare your C header then use the C code directly</p>
 <pre>
 <code>ffi.cdef "int open(const char *pathname, int flags);"</code>
-<code>function open(path, flags) return C.open(path, flags) end
+<code>function open(path, flags) return C.open(path, flags) end</code>
 </pre>
-<p>Pretty much declare you C header then use the code directly, but may want cleaner wrappers eg see <a href="ljsyscall">https://github.com/justincormack/ljsyscall</a>
 </div>
 </section>
 
@@ -268,6 +268,7 @@
 <li>tunnelling
 <li>filtering
 <li>routing
+<li>DDoS protection
 </ul>
 </div>
 </section>
@@ -286,7 +287,7 @@
 
 <section class="slide">
 <div>
-	<pre>
+	<pre style="font-size:60%;">
 <code>function PcapFilter:push ()</code>
 <code>   local i = assert(self.input.input or self.input.rx, "input port not found")</code>
 <code>   local o = assert(self.output.output or self.output.tx, "output port not found")</code>
@@ -309,7 +310,7 @@
 
 <section class="slide shout">
 <div>
-<h2>MirageOS: the full stack</h2>
+<h2>MirageOS: the&nbsp;full&nbsp;stack</h2>
 </div>
 </section>
 
@@ -342,18 +343,7 @@
 </div>
 </section>
 
-<section class="slide">
-<div>
-<h2>Examples of unikernels</h2>
-<ul>
-<li><a href="https://mirage.io/">Mirage</a> (OCaml)
-<li><a href="https://galois.com/project/halvm/">HalVM</a> (Haskell)
-<li><a href="http://erlangonxen.org/">Ling</a> (Erlang)
-<li><a href="http://runtimejs.org/">runtime.js</a> (JavaScript)
-<li><a href="http://www.includeos.org/">IncludeOS</a> (C++)
-</ul>
-</div>
-</section>
+
 
 <section class="slide">
 	<div>
@@ -369,6 +359,18 @@
 </div>
 </section>
 
+<section class="slide">
+<div>
+<h2>Examples of unikernels</h2>
+<ul>
+<li><a href="https://mirage.io/">Mirage</a> (OCaml)
+<li><a href="https://galois.com/project/halvm/">HalVM</a> (Haskell)
+<li><a href="http://erlangonxen.org/">Ling</a> (Erlang)
+<li><a href="http://runtimejs.org/">runtime.js</a> (JavaScript)
+<li><a href="http://www.includeos.org/">IncludeOS</a> (C++)
+</ul>
+</div>
+</section>
 
 <section class="slide shout">
 <div>
@@ -421,14 +423,23 @@
 </div>
 </section>
 
-<!-- docker 4 mac / win - pic -->
+<section class="slide pic">
+<div>
+<a href="https://beta.docker.com/">
+<img src="pictures/betadockercom.png" width="100%"/>
+</a>
+</div>
+</section>
 
-<!-- hyperkit -->
 
-<!-- unikernels -->
-<!-- containers -->
+<section class="slide pic">
+	<p><a href="https://github.com/docker/vpnkit">vpnkit</a>
+<div>
+<img src="pictures/vpnkit.png"/>
+</div>
+</section>
 
-<!-- distributed systems?? -->
+
 
 <section class="slide pic">
 <div>
